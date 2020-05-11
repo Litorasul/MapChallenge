@@ -1,6 +1,7 @@
 namespace MapChallenge.Server
 {
     using MapChallenge.Server.Data;
+    using MapChallenge.Server.Data.Seeding;
     using MapChallenge.Server.Models;
 
     using Microsoft.AspNetCore.Authentication;
@@ -50,7 +51,7 @@ namespace MapChallenge.Server
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
 
-                // ApplicationDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider);
+                ApplicationDbContextSeeder.Seed(dbContext, serviceScope.ServiceProvider);
             }
 
             if (env.IsDevelopment())
