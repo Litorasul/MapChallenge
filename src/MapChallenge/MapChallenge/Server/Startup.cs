@@ -2,6 +2,7 @@ namespace MapChallenge.Server
 {
     using MapChallenge.Server.Data;
     using MapChallenge.Server.Models;
+
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
