@@ -22,6 +22,7 @@
                 new ContinentsSeeder(),
                 new CountriesAndCapitalsSeeder(),
                 new UsaStateSeeder(),
+                new CanadaProvincesSeeder(),
             };
 
             foreach (var seeder in seeders)
