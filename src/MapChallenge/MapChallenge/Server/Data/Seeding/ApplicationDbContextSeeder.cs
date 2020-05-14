@@ -21,6 +21,7 @@
             {
                 new ContinentsSeeder(),
                 new CountriesAndCapitalsSeeder(),
+                new UsaStateSeeder(),
             };
 
             foreach (var seeder in seeders)
