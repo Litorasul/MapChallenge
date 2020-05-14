@@ -7,5 +7,11 @@
         public const string AdministratorRoleName = "Administrator";
 
         public const string JsonContentType = "application/json";
+
+        public const string CountriesAndCapitalsJsonPath = @"../Server/Data/Seeding/JsonData/country-capital-continent.json";
+
+        public const string UsStatesAndCapitalsJsonPath = @"../Server/Data/Seeding/JsonData/us_state_capitals.json";
+
+        public const string CanadaStatesAndCapitalsJsonPath = @"../Server/Data/Seeding/JsonData/canadian-provinces.json";
     }
 }

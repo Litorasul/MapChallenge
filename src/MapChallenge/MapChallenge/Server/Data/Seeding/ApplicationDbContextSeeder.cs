@@ -20,6 +20,7 @@
             var seeders = new List<ISeeder>
             {
                 new ContinentsSeeder(),
+                new CountriesAndCapitalsSeeder(),
             };
 
             foreach (var seeder in seeders)
