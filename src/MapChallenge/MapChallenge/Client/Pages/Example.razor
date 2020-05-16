@@ -6,11 +6,11 @@
 
 @code
 {
-    private int random = 0;
+    private string random = "Empty";
 
     private async Task FetchRandom()
     {
-        random = await this.Http.GetFromJsonAsync<int>("Example");
+        random = await this.Http.GetStringAsync("Example");
     }
 
 }

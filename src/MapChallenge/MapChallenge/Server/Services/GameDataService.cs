@@ -1,10 +1,11 @@
 ﻿namespace MapChallenge.Server.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Security.Cryptography;
-    using System.Threading.Tasks;
 
     using MapChallenge.Server.Data;
+    using MapChallenge.Shared.Mapping;
 
     public class GameDataService : IGameDataService
     {
@@ -15,9 +16,43 @@
             this.dbContext = dbContext;
         }
 
-        public Task<List<string>> GetAllCountriesByContinent(string continent)
+        public List<T> GetAllCountriesByContinent<T>(string continent, int? count = null)
         {
-            throw new System.NotImplementedException();
+            List<T> countries = this.dbContext.Countries.Where(x => x.Continent.Name == continent).To<T>().ToList();
+            Shuffle(countries);
+
+            if (count.HasValue)
+            {
+                return countries.Take(count.Value).ToList();
+            }
+
+            return countries;
+        }
+
+        public List<T> GetAllStates<T>(int? count = null)
+        {
+            List<T> states = this.dbContext.States.To<T>().ToList();
+            Shuffle(states);
+
+            if (count.HasValue)
+            {
+                return states.Take(count.Value).ToList();
+            }
+
+            return states;
+        }
+
+        public List<T> GetAllStatesInUsa<T>(int? count = null)
+        {
+            List<T> states = this.dbContext.States.Where(x => x.Country.Name == "United States").To<T>().ToList();
+            Shuffle(states);
+
+            if (count.HasValue)
+            {
+                return states.Take(count.Value).ToList();
+            }
+
+            return states;
         }
 
         private static void Shuffle<T>(IList<T> list)

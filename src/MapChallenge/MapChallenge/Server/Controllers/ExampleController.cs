@@ -1,7 +1,10 @@
 ﻿namespace MapChallenge.Server.Controllers
 {
     using System;
+    using System.Linq;
 
+    using MapChallenge.Server.Services;
+    using MapChallenge.Server.ViewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +13,20 @@
     [Route("[controller]")]
     public class ExampleController : ControllerBase
     {
-        [HttpGet]
-        public int Get()
-        {
-            Random rand = new Random();
+        private readonly IGameDataService service;
 
-            return rand.Next(52);
+        public ExampleController(IGameDataService service)
+        {
+            this.service = service;
+        }
+
+        [HttpGet]
+        public string Get()
+        {
+            var countries = this.service.GetAllStatesInUsa<StateViewModel>(5);
+            string country = countries.First().Capital;
+
+            return country;
         }
     }
 }
