@@ -1,9 +1,12 @@
-namespace MapChallenge.Server
+﻿namespace MapChallenge.Server
 {
+    using System.Reflection;
+
     using MapChallenge.Server.Data;
     using MapChallenge.Server.Data.Seeding;
     using MapChallenge.Server.Models;
-
+    using MapChallenge.Server.Services;
+    using MapChallenge.Shared.Mapping;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -40,11 +43,15 @@ namespace MapChallenge.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<IGameDataService, GameDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ApplicationUser).GetTypeInfo().Assembly);
+
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -63,6 +70,7 @@ namespace MapChallenge.Server
             else
             {
                 app.UseExceptionHandler("/Error");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
