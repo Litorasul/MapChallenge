@@ -13,5 +13,14 @@
         public const string UsStatesAndCapitalsJsonPath = @"../Server/Data/Seeding/JsonData/us_state_capitals.json";
 
         public const string CanadaStatesAndCapitalsJsonPath = @"../Server/Data/Seeding/JsonData/canadian-provinces.json";
+
+        public static readonly string[] Continents =
+        {
+            "Africa",
+            "Asia",
+            "Europe",
+            "North America",
+            "South America",
+        };
     }
 }

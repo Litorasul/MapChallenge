@@ -1,10 +1,14 @@
-﻿namespace MapChallenge.Server.Data.Seeding
+﻿using MapChallenge.Shared;
+
+namespace MapChallenge.Server.Data.Seeding
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using MapChallenge.Server.Models.GeographicData;
+
+    using static MapChallenge.Shared.GlobalConstants;
 
     public class ContinentsSeeder : ISeeder
     {
@@ -15,14 +19,7 @@
                 return;
             }
 
-            var continents = new List<string>
-            {
-                "Africa",
-                "Asia",
-                "Europe",
-                "North America",
-                "South America",
-            };
+            var continents = GlobalConstants.Continents;
 
             foreach (var item in continents)
             {
