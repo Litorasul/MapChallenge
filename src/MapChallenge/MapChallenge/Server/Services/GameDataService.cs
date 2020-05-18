@@ -6,6 +6,7 @@
 
     using MapChallenge.Server.Data;
     using MapChallenge.Shared.Mapping;
+    using MapChallenge.Shared.ViewModels;
 
     public class GameDataService : IGameDataService
     {
@@ -16,9 +17,14 @@
             this.dbContext = dbContext;
         }
 
-        public List<T> GetAllCountriesByContinent<T>(string continent, int? count = null)
+        public List<CountryViewModel> GetAllCountriesByContinent(string continent, int? count = null)
         {
-            List<T> countries = this.dbContext.Countries.Where(x => x.Continent.Name == continent).To<T>().ToList();
+            List<CountryViewModel> countries = this.dbContext.Countries.Where(x => x.Continent.Name == continent).Select(x => new CountryViewModel
+            {
+                Name = x.Name,
+                Capital = x.Capital,
+            }).ToList();
+
             Shuffle(countries);
 
             if (count.HasValue)
@@ -29,9 +35,14 @@
             return countries;
         }
 
-        public List<T> GetAllStates<T>(int? count = null)
+        public List<StateViewModel> GetAllStates(int? count = null)
         {
-            List<T> states = this.dbContext.States.To<T>().ToList();
+            List<StateViewModel> states = this.dbContext.States.Select(x => new StateViewModel
+            {
+                Name = x.Name,
+                Capital = x.Capital,
+            }).ToList();
+
             Shuffle(states);
 
             if (count.HasValue)
@@ -42,9 +53,14 @@
             return states;
         }
 
-        public List<T> GetAllStatesInUsa<T>(int? count = null)
+        public List<StateViewModel> GetAllStatesInUsa(int? count = null)
         {
-            List<T> states = this.dbContext.States.Where(x => x.Country.Name == "United States").To<T>().ToList();
+            List<StateViewModel> states = this.dbContext.States.Where(x => x.Country.Name == "United States").Select(x => new StateViewModel
+            {
+                Name = x.Name,
+                Capital = x.Capital,
+            }).ToList();
+
             Shuffle(states);
 
             if (count.HasValue)

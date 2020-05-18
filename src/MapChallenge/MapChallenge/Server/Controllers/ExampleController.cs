@@ -10,7 +10,7 @@
 
     [AllowAnonymous]
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class ExampleController : ControllerBase
     {
         private readonly IGameDataService service;

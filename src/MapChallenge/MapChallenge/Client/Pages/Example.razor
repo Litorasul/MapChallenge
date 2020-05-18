@@ -10,7 +10,7 @@
 
     private async Task FetchRandom()
     {
-        random = await this.Http.GetStringAsync("Example");
+        random = await this.Http.GetStringAsync("/api/Example");
     }
 
 }

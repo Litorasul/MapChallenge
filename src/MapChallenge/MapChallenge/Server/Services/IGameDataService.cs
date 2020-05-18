@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using MapChallenge.Shared.ViewModels;
+
     public interface IGameDataService
     {
         /// <summary>
@@ -12,7 +14,7 @@
         /// <param name="continent">The name of the continent.</param>
         /// <param name="count">The amount of entries needed.</param>
         /// <returns>List of View Models, shuffled.</returns>
-        List<T> GetAllCountriesByContinent<T>(string continent, int? count = null);
+        List<CountryViewModel> GetAllCountriesByContinent(string continent, int? count = null);
 
         /// <summary>
         /// Get all states from the Database, shuffled.
@@ -20,7 +22,7 @@
         /// <typeparam name="T">View Model, might contain Name or Capital or both.</typeparam>
         /// <param name="count">The amount of entries needed.</param>
         /// <returns>List of View Models, shuffled.</returns>
-        List<T> GetAllStates<T>(int? count = null);
+        List<StateViewModel> GetAllStates(int? count = null);
 
         /// <summary>
         /// Get all states in USA, shuffled.
@@ -28,6 +30,6 @@
         /// <typeparam name="T">View Model, might contain Name or Capital or both.</typeparam>
         /// <param name="count">The amount of entries needed.</param>
         /// <returns>List of View Models, shuffled.</returns>
-        List<T> GetAllStatesInUsa<T>(int? count = null);
+        List<StateViewModel> GetAllStatesInUsa(int? count = null);
     }
 }
