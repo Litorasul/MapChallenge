@@ -4,8 +4,12 @@
 
     using MapChallenge.Server.Services;
     using MapChallenge.Shared.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [AllowAnonymous]
+    [ApiController]
+    [Route("/api/[controller]")]
     public class StatesInUsaController : ControllerBase
     {
         private readonly IGameDataService service;
@@ -15,7 +19,7 @@
             this.service = service;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public IList<StateViewModel> GetAll()
         {
             var states = this.service.GetAllStatesInUsa();

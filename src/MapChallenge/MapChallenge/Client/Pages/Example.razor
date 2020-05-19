@@ -1,23 +1,31 @@
 ﻿@page "/example"
 @using MapChallenge.Shared.ViewModels
+@using MapChallenge.Client.Infrastructure
 @inject HttpClient Http
+@inject IApiClient Client
 
-<h1>Example: @random</h1>
+<h1>Example Country: @random</h1>
+<h1>Example State: @state</h1>
 <button class="btn btn-primary" @onclick="FetchRandom">Click me</button>
 
 @code
 {
     private string random = "Empty";
+    private string state = "Empty";
 
     private IList<CountryViewModel> countries;
+    private IList<StateViewModel> states;
 
     private async Task FetchRandom()
     {
         var continent = "Europe";
         var count = 5;
 
-        countries = await this.Http.GetFromJsonAsync<IList<CountryViewModel>>($"/api/CountriesPerContinent/Count?continent={continent}&count={count}");
+        countries = await this.Client.GetAllCountriesPerContinent(continent);
         random = countries.First().Name;
+
+        states = await this.Client.GetAllStates();
+        state = states.First().Name;
     }
 
 }

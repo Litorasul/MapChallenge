@@ -23,7 +23,7 @@
             this.service = service;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult<IList<CountryViewModel>> GetAll(string continent)
         {
             if (string.IsNullOrWhiteSpace(continent))

@@ -19,7 +19,7 @@
             this.service = service;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public IList<StateViewModel> GetAll()
         {
             var states = this.service.GetAllStates();

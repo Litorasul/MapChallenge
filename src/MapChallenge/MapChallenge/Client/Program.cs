@@ -1,3 +1,5 @@
+using MapChallenge.Client.Infrastructure;
+
 namespace MapChallenge.Client
 {
     using System;
@@ -25,6 +27,8 @@ namespace MapChallenge.Client
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("MapChallenge.ServerAPI"));
 
             builder.Services.AddApiAuthorization();
+
+            builder.Services.AddTransient<IApiClient, ApiClient>();
 
             await builder.Build().RunAsync();
         }
