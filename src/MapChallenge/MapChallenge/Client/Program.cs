@@ -1,11 +1,11 @@
-using MapChallenge.Client.Infrastructure;
-
 namespace MapChallenge.Client
 {
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
 
+    using MapChallenge.Client.Game;
+    using MapChallenge.Client.Infrastructure;
     using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +29,7 @@ namespace MapChallenge.Client
             builder.Services.AddApiAuthorization();
 
             builder.Services.AddTransient<IApiClient, ApiClient>();
+            builder.Services.AddTransient<IGameEngine, GameEngine>();
 
             await builder.Build().RunAsync();
         }

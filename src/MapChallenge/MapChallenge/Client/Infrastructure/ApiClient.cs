@@ -16,42 +16,42 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<IList<CountryViewModel>> GetAllCountriesPerContinent(string continent)
+        public async Task<IList<CountryViewModel>> GetAllCountriesPerContinentAsync(string continent)
         {
             var countries = await this.httpClient
                 .GetFromJsonAsync<IList<CountryViewModel>>($"/api/CountriesPerContinent/all?continent={continent}");
             return countries;
         }
 
-        public async Task<IList<StateViewModel>> GetAllStates()
+        public async Task<IList<StateViewModel>> GetAllStatesAsync()
         {
             var states = await this.httpClient
                 .GetFromJsonAsync<IList<StateViewModel>>("/api/States/all");
             return states;
         }
 
-        public async Task<IList<StateViewModel>> GetAllUsaStates()
+        public async Task<IList<StateViewModel>> GetAllUsaStatesAsync()
         {
             var states = await this.httpClient
                 .GetFromJsonAsync<IList<StateViewModel>>("/api/StatesInUsa/all");
             return states;
         }
 
-        public async Task<IList<CountryViewModel>> GetCountAmountCountriesPerContinent(string continent, int count)
+        public async Task<IList<CountryViewModel>> GetCountAmountCountriesPerContinentAsync(string continent, int count)
         {
             var countries = await this.httpClient
                 .GetFromJsonAsync<IList<CountryViewModel>>($"/api/CountriesPerContinent/Count?continent={continent}&count={count}");
             return countries;
         }
 
-        public async Task<IList<StateViewModel>> GetCountAmountStates(int count)
+        public async Task<IList<StateViewModel>> GetCountAmountStatesAsync(int count)
         {
             var states = await this.httpClient
                 .GetFromJsonAsync<IList<StateViewModel>>($"/api/States/Count?count={count}");
             return states;
         }
 
-        public async Task<IList<StateViewModel>> GetCountAmountUsaStates(int count)
+        public async Task<IList<StateViewModel>> GetCountAmountUsaStatesAsync(int count)
         {
             var states = await this.httpClient
                 .GetFromJsonAsync<IList<StateViewModel>>($"/api/StatesInUsa/Count?count={count}");

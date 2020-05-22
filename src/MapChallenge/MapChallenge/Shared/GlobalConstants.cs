@@ -22,5 +22,7 @@
             "North America",
             "South America",
         };
+
+        public const int ElementsAmountInShortGame = 20;
     }
 }

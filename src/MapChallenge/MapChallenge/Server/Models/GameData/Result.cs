@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using MapChallenge.Shared;
+
     public class Result
     {
         public int Id { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace MapChallenge.Server.Models.GameData
+﻿namespace MapChallenge.Shared
 {
     public enum GameType
     {
