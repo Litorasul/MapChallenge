@@ -1,8 +1,11 @@
 ﻿@page "/example"
 @using MapChallenge.Shared.ViewModels
 @using MapChallenge.Client.Infrastructure
+@using MapChallenge.Client.Game
+@using MapChallenge.Shared
 @inject HttpClient Http
 @inject IApiClient Client
+@inject IGameEngine Engine
 
 <h1>Example Country: @random</h1>
 <h1>Example State: @state</h1>
@@ -13,19 +16,17 @@
     private string random = "Empty";
     private string state = "Empty";
 
-    private IList<CountryViewModel> countries;
-    private IList<StateViewModel> states;
+    private IList<GameElement> countries;
+    private IList<GameElement> states;
 
     private async Task FetchRandom()
     {
-        var continent = "Europe";
-        var count = 5;
 
-        countries = await this.Client.GetAllCountriesPerContinent(continent);
-        random = countries.First().Name;
+        countries = await this.Engine.FetchGameData(GameType.AsianCountries, true);
+        random = countries.First().Question;
 
-        states = await this.Client.GetAllStates();
-        state = states.First().Name;
+        states = await this.Engine.FetchGameData(GameType.StateCapitalsInUsaAndCanada, false);
+        state = states.First().Question;
     }
 
 }

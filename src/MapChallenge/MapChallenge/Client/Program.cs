@@ -9,11 +9,15 @@ namespace MapChallenge.Client
     using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
+    using Syncfusion.Blazor;
+
+    using static MapChallenge.Shared.Keys;
 
     public class Program
     {
         public static async Task Main(string[] args)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(SyncfusionBlazorKey);
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
@@ -25,6 +29,8 @@ namespace MapChallenge.Client
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("MapChallenge.ServerAPI"));
+
+            builder.Services.AddSyncfusionBlazor();
 
             builder.Services.AddApiAuthorization();
 

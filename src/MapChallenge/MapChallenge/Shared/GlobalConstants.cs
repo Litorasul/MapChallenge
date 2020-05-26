@@ -14,6 +14,8 @@
 
         public const string CanadaStatesAndCapitalsJsonPath = @"../Server/Data/Seeding/JsonData/canadian-provinces.json";
 
+        public const int ElementsAmountInShortGame = 20;
+
         public static readonly string[] Continents =
         {
             "Africa",
@@ -22,7 +24,5 @@
             "North America",
             "South America",
         };
-
-        public const int ElementsAmountInShortGame = 20;
     }
 }
