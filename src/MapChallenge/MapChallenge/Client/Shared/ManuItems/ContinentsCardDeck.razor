@@ -1,7 +1,7 @@
 ﻿
     <div class="card-deck">
 
-        <div class="card text-center">
+        <div class="card text-center" style="@(IsHooveredAfrica ? "background-color: yellow" : "background-color: white")" @onmouseover="ToggleIsHoveredAfrica" @onmouseout="ToggleIsHoveredAfrica">
             <h3 class="text-success m-2"><i class="fas fa-globe-africa"></i></h3>
             <div class="card-body">
                 <h3 class="card-title">Africa</h3>
@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center" style="@(IsHooveredAsia ? "background-color: orange" : "background-color: white")" @onmouseover="ToggleIsHoveredAsia" @onmouseout="ToggleIsHoveredAsia">
             <h3 class="text-success m-2"><i class="fas fa-globe-asia"></i></h3>
             <div class="card-body">
                 <h3 class="card-title">Asia</h3>
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center" style="@(IsHooveredEurope ? "background-color: lightpink" : "background-color: white")" @onmouseover="ToggleIsHoveredEurope" @onmouseout="ToggleIsHoveredEurope">
             <h3 class="text-success m-2"><i class="fas fa-globe-europe"></i></h3>
             <div class="card-body">
                 <h3 class="card-title">Europe</h3>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center" style="@(IsHooveredNAmerica ? "background-color: lightgreen" : "background-color: white")" @onmouseover="ToggleIsHoveredNAmerica" @onmouseout="ToggleIsHoveredNAmerica">
             <h3 class="text-success m-2"><i class="fas fa-globe-americas"></i></h3>
             <div class="card-body">
                 <h3 class="card-title">North America</h3>
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center" style="@(IsHooveredSAmerica ? "background-color: lightskyblue" : "background-color: white")" @onmouseover="ToggleIsHoveredSA" @onmouseout="ToggleIsHoveredSA">
             <h3 class="text-success m-2"><i class="fas fa-globe-americas"></i></h3>
             <div class="card-body">
                 <h3 class="card-title">South America</h3>
@@ -50,5 +50,35 @@
 
 @code {
 
-    
+    private bool IsHooveredAfrica { get; set; } = false;
+    private bool IsHooveredAsia { get; set; } = false;
+    private bool IsHooveredEurope { get; set; } = false;
+    private bool IsHooveredNAmerica { get; set; } = false;
+    private bool IsHooveredSAmerica { get; set; } = false;
+
+    private void ToggleIsHoveredAfrica()
+    {
+        IsHooveredAfrica = !IsHooveredAfrica;
+    }
+
+    private void ToggleIsHoveredAsia()
+    {
+        IsHooveredAsia = !IsHooveredAsia;
+    }
+
+    private void ToggleIsHoveredEurope()
+    {
+        IsHooveredEurope = !IsHooveredEurope;
+    }
+
+    private void ToggleIsHoveredNAmerica()
+    {
+        IsHooveredNAmerica = !IsHooveredNAmerica;
+    }
+
+    private void ToggleIsHoveredSA()
+    {
+        IsHooveredSAmerica = !IsHooveredSAmerica;
+    }
+
 }
