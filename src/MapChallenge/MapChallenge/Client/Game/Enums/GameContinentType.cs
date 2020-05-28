@@ -2,6 +2,7 @@
 {
     public enum GameContinentType
     {
+        NotSelected = 0,
         Africa = 1,
         Asia = 2,
         Europe = 3,

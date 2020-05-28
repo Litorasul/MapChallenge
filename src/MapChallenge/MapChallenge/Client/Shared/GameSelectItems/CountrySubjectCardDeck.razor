@@ -1,0 +1,36 @@
+﻿<div class="card-deck">
+
+    <div class="card text-center" style="@(IsHooveredCountries ? "background-color: lightskyblue" : "background-color: white")" @onmouseover="ToggleIsHoveredCountries" @onmouseout="ToggleIsHoveredCountries">
+        <h3 class="text-success m-2"><i class="far fa-flag"></i></h3>
+        <div class="card-body">
+            <h3 class="card-title">Countries</h3>
+            <p class="card-text"> Choose if you want to guess Countries.</p>
+            <a href="#" class="btn btn-success">Select</a>
+        </div>
+    </div>
+
+    <div class="card text-center" style="@(IsHooveredCapitals ? "background-color: lightpink" : "background-color: white")" @onmouseover="ToggleIsHoveredCapitals" @onmouseout="ToggleIsHoveredCapitals">
+        <h3 class="text-success m-2"><i class="far fa-star"></i></h3>
+        <div class="card-body">
+            <h3 class="card-title">Capitals</h3>
+            <p class="card-text"> Choose if you want to guess Capitals.</p>
+            <a href="#" class="btn btn-success">Select</a>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    private bool IsHooveredCountries { get; set; } = false;
+    private bool IsHooveredCapitals { get; set; } = false;
+
+    private void ToggleIsHoveredCountries()
+    {
+        IsHooveredCountries = !IsHooveredCountries;
+    }
+
+    private void ToggleIsHoveredCapitals()
+    {
+        IsHooveredCapitals = !IsHooveredCapitals;
+    }
+}

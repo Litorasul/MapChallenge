@@ -1,4 +1,6 @@
-﻿
+﻿@using MapChallenge.Client.Game
+@inject IGameStartInfo GameStartInfo
+
     <div class="card-deck">
 
         <div class="card text-center" style="@(IsHooveredAfrica ? "background-color: yellow" : "background-color: white")" @onmouseover="ToggleIsHoveredAfrica" @onmouseout="ToggleIsHoveredAfrica">
@@ -6,7 +8,7 @@
             <div class="card-body">
                 <h3 class="card-title">Africa</h3>
                 <p class="card-text"> Choose if you want to guess Countries or Capitals in Africa.</p>
-                <a href="#" class="btn btn-success">Select</a>
+                <a href="#" @onclick="(() => SelectContinent(GameContinentType.Africa))" class="btn btn-success">Select</a>
             </div>
         </div>
 
@@ -15,7 +17,7 @@
             <div class="card-body">
                 <h3 class="card-title">Asia</h3>
                 <p class="card-text"> Choose if you want to guess Countries or Capitals in Asia.</p>
-                <a href="#" class="btn btn-success">Select</a>
+                <a href="#" @onclick="(() => SelectContinent(GameContinentType.Asia))" class="btn btn-success">Select</a>
             </div>
         </div>
 
@@ -24,7 +26,7 @@
             <div class="card-body">
                 <h3 class="card-title">Europe</h3>
                 <p class="card-text"> Choose if you want to guess Countries or Capitals in Europe.</p>
-                <a href="#" class="btn btn-success">Select</a>
+                <a href="#" @onclick="(() => SelectContinent(GameContinentType.Europe))" class="btn btn-success">Select</a>
             </div>
         </div>
 
@@ -33,7 +35,7 @@
             <div class="card-body">
                 <h3 class="card-title">North America</h3>
                 <p class="card-text"> Choose if you want to guess States or State Capitals in North America.</p>
-                <a href="#" class="btn btn-success">Select</a>
+                <a href="#" @onclick="(() => SelectContinent(GameContinentType.NorthAmerica))" class="btn btn-success">Select</a>
             </div>
         </div>
 
@@ -42,7 +44,7 @@
             <div class="card-body">
                 <h3 class="card-title">South America</h3>
                 <p class="card-text"> Choose if you want to guess Countries or Capitals in South America.</p>
-                <a href="#" class="btn btn-success">Select</a>
+                <a href="#" @onclick="(() => SelectContinent(GameContinentType.SouthAmerica))" class="btn btn-success">Select</a>
             </div>
         </div>
 
@@ -55,6 +57,8 @@
     private bool IsHooveredEurope { get; set; } = false;
     private bool IsHooveredNAmerica { get; set; } = false;
     private bool IsHooveredSAmerica { get; set; } = false;
+
+    
 
     private void ToggleIsHoveredAfrica()
     {
@@ -79,6 +83,11 @@
     private void ToggleIsHoveredSA()
     {
         IsHooveredSAmerica = !IsHooveredSAmerica;
+    }
+
+    private void SelectContinent(GameContinentType continent)
+    {
+        this.GameStartInfo.Continent = continent;
     }
 
 }
