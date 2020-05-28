@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using MapChallenge.Client.Game.Enums;
     using MapChallenge.Client.Infrastructure;
     using MapChallenge.Shared;
     using MapChallenge.Shared.ViewModels;
@@ -105,7 +106,7 @@
         public GameElement Compare(GameElement element)
         {
             element.State =
-                element.Question.Equals(element.Answer, StringComparison.OrdinalIgnoreCase) ? State.Correct : State.False;
+                element.Question.Equals(element.Answer, StringComparison.OrdinalIgnoreCase) ? GameState.Correct : GameState.False;
 
             return element;
         }
@@ -129,7 +130,7 @@
             {
                 GameElement element = new GameElement
                 {
-                    State = State.Unanswered,
+                    State = GameState.Unanswered,
                     Question = type == "country" ? model.Name : model.Capital,
                 };
 
@@ -166,7 +167,7 @@
             {
                 GameElement element = new GameElement
                 {
-                    State = State.Unanswered,
+                    State = GameState.Unanswered,
                     Question = type == "state" ? model.Name : model.Capital,
                 };
 

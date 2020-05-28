@@ -1,6 +1,6 @@
-﻿namespace MapChallenge.Client.Game
+﻿namespace MapChallenge.Client.Game.Enums
 {
-    public enum State
+    public enum GameState
     {
         Unanswered = 0,
         Correct = 1,

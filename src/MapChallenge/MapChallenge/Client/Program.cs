@@ -34,6 +34,7 @@ namespace MapChallenge.Client
 
             builder.Services.AddApiAuthorization();
 
+            builder.Services.AddSingleton<IGameStartInfo, GameStartInfo>();
             builder.Services.AddTransient<IApiClient, ApiClient>();
             builder.Services.AddTransient<IGameEngine, GameEngine>();
 
