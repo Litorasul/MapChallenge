@@ -1,21 +1,27 @@
 ﻿@using MapChallenge.Client.Game
 @inject IGameStartInfo GameStartInfo
 
-<h3>@GameStartInfo.Continent.ToString()</h3>
+<h3>@GameStartInfo.Continent.ToString() > @GameStartInfo.Subject.ToString() > @GameStartInfo.IsShortGame</h3>
 
 @if (this.GameStartInfo.Continent == GameContinentType.NotSelected)
 {
     <ContinentsCardDeck />
 
 }
-else
+else if (this.GameStartInfo.Subject == GameSubjectType.NotSelected && this.GameStartInfo.Continent != GameContinentType.NorthAmerica)
 {
     <CountrySubjectCardDeck />
 }
-
-@code 
+else if (this.GameStartInfo.Subject == GameSubjectType.NotSelected && this.GameStartInfo.Continent == GameContinentType.NorthAmerica)
 {
-
+    <StateSubjectCardDeck />
+}
+else
+{
+    <ChooseGameSize />
+}
+@code
+{
     protected override void OnInitialized()
     {
         this.GameStartInfo.OnChange += this.StateHasChanged;

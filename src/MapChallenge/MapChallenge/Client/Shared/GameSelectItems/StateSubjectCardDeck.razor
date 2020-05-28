@@ -1,0 +1,79 @@
+﻿@using MapChallenge.Client.Game
+@inject IGameStartInfo GameStartInfo
+
+<div class="card-deck">
+
+    <div class="card text-center" style="@(IsHooveredStatesUsa ? "background-color: yellow" : "background-color: white")" @onmouseover="ToggleIsHoveredStatesUsa" @onmouseout="ToggleIsHoveredStatesUsa">
+        <h3 class="text-success m-2"><i class="fas fa-flag-usa"></i></h3>
+        <div class="card-body">
+            <h3 class="card-title">States in USA</h3>
+            <p class="card-text"> Choose if you want to guess States in USA.</p>
+            <a href="#" @onclick="(() => SelectSubject(GameSubjectType.UsaStates))" class="btn btn-success">Select</a>
+        </div>
+    </div>
+
+    <div class="card text-center" style="@(IsHooveredCapitalsUsa ? "background-color: orange" : "background-color: white")" @onmouseover="ToggleIsHoveredCapitalsUsa" @onmouseout="ToggleIsHoveredCapitalsUsa">
+        <h3 class="text-success m-2"><i class="fas fa-flag-usa"></i></h3>
+        <div class="card-body">
+            <h3 class="card-title">State Capitals in USA</h3>
+            <p class="card-text"> Choose if you want to guess State Capitals in USA.</p>
+            <a href="#" @onclick="(() => SelectSubject(GameSubjectType.UsaStateCapitals))" class="btn btn-success">Select</a>
+        </div>
+    </div>
+
+    <div class="card text-center" style="@(IsHooveredStatesUsaCanada ? "background-color: lightpink" : "background-color: white")" @onmouseover="ToggleIsHoveredStatesUsaCanada" @onmouseout="ToggleIsHoveredStatesUsaCanada">
+        <h3 class="text-success m-2"><i class="fas fa-flag-usa"></i> <i class="fab fa-canadian-maple-leaf"></i></h3>
+        <div class="card-body">
+            <h3 class="card-title">States in USA & Canada</h3>
+            <p class="card-text"> Choose if you want to guess States in USA & Canada.</p>
+            <a href="#" @onclick="(() => SelectSubject(GameSubjectType.AllStates))" class="btn btn-success">Select</a>
+        </div>
+    </div>
+
+    <div class="card text-center" style="@(IsHooveredCapitalsUsaCanada ? "background-color: lightgreen" : "background-color: white")" @onmouseover="ToggleIsHoveredCapitalsUsaCanada" @onmouseout="ToggleIsHoveredCapitalsUsaCanada">
+        <h3 class="text-success m-2"><i class="fas fa-flag-usa"></i> <i class="fab fa-canadian-maple-leaf"></i></h3>
+        <div class="card-body">
+            <h3 class="card-title">State Capitals in USA & Canada</h3>
+            <p class="card-text"> Choose if you want to guess States or State Capitals in USA & Canada</p>
+            <a href="#" @onclick="(() => SelectSubject(GameSubjectType.AllStateCapitals))" class="btn btn-success">Select</a>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    private bool IsHooveredStatesUsa { get; set; } = false;
+    private bool IsHooveredCapitalsUsa { get; set; } = false;
+    private bool IsHooveredStatesUsaCanada { get; set; } = false;
+    private bool IsHooveredCapitalsUsaCanada { get; set; } = false;
+
+
+
+
+    private void ToggleIsHoveredStatesUsa()
+    {
+        IsHooveredStatesUsa = !IsHooveredStatesUsa;
+    }
+
+    private void ToggleIsHoveredCapitalsUsa()
+    {
+        IsHooveredCapitalsUsa = !IsHooveredCapitalsUsa;
+    }
+
+    private void ToggleIsHoveredStatesUsaCanada()
+    {
+        IsHooveredStatesUsaCanada = !IsHooveredStatesUsaCanada;
+    }
+
+    private void ToggleIsHoveredCapitalsUsaCanada()
+    {
+        IsHooveredCapitalsUsaCanada = !IsHooveredCapitalsUsaCanada;
+    }
+
+    private void SelectSubject(GameSubjectType subject)
+    {
+        this.GameStartInfo.Subject = subject;
+    }
+
+}
