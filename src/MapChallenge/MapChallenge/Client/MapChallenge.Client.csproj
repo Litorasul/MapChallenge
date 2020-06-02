@@ -31,4 +31,8 @@
     <ProjectReference Include="..\Shared\MapChallenge.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\MapsGeoJson\" />
+  </ItemGroup>
+
 </Project>
