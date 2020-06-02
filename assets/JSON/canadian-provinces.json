@@ -1,0 +1,66 @@
+[
+  {
+      "name" : "Alberta",
+      "capital" : "Edmonton"
+  }
+  ,
+  {
+      "name" : "British Columbia",
+      "capital" : "Victoria"
+  }
+  ,
+  {
+      "name" : "Manitoba",
+      "capital" : "Winnipeg"
+  }
+  ,
+  {
+      "name" : "New Brunswick",
+      "capital" : "Fredericton"
+  }
+  ,
+  {
+      "name" : "Newfoundland And Labrador",
+      "capital" : "St John's"
+  }
+  ,
+  {
+      "name" : "Nova Scotia",
+      "capital" : "Halifax"
+  }
+  ,
+  {
+      "name" : "Nunavut",
+      "capital" : "Iqaluit"
+  }
+  ,
+  {
+      "name" : "Northwest Territories",
+      "capital" : "Yellowknife"
+  }
+  ,
+  {
+      "name" : "Ontario",
+      "capital" : "Toronto"
+  }
+  ,
+  {
+      "name" : "Prince Edward Island",
+      "capital" : "Charlottetown"
+  }
+  ,
+  {
+      "name" : "Quebec",
+      "capital" : "Quebec City"
+  }
+  ,
+  {
+      "name" : "Saskatchewan",
+      "capital" : "Regina"
+  }
+  ,
+  {
+      "name" : "Yukon",
+      "capital" : "Whitehorse"
+  }
+]
