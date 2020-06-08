@@ -1,0 +1,137 @@
+﻿@using Syncfusion.Blazor.Maps
+@using Syncfusion.Blazor.Data
+@using Newtonsoft.Json.Linq
+@using MapChallenge.Client.Infrastructure
+@using MapChallenge.Client.Game
+@using MapChallenge.Shared
+@using Syncfusion.Blazor.Diagrams
+@using static MapChallenge.Shared.GlobalConstants;
+@inject IGameStartInfo GameStartInfo
+@inject IGameEngine Engine
+
+<div >
+    <SfMaps Height="auto">
+        <MapsZoomSettings Enable="true" PinchZooming="true"></MapsZoomSettings>
+        <MapsAreaSettings Background="#bfc6c7"></MapsAreaSettings>
+        
+        <MapsLayers>
+            <MapsLayer ShapeData="@this.GetSettings()"
+                       ShapePropertyPath='@("name")'
+                       ShapeDataPath="@DataPath"
+                       DataSource="@GameElements">
+                <MapsShapeSettings Fill="#ffffff">
+                    <MapsShapeBorder Color="#000000" Width="0.5"></MapsShapeBorder>
+                </MapsShapeSettings>
+                <MapsLayerTooltipSettings Visible="true" ValuePath="@DataPath"></MapsLayerTooltipSettings>
+                <MapsLayerSelectionSettings Enable="true" Fill="red" Opacity="1"></MapsLayerSelectionSettings>
+                <MapsEvents ShapeSelected="GetResult"></MapsEvents>
+                <MapsLayerHighlightSettings Enable="true" Fill="green">
+                    <MapsLayerHighlightBorder Color="white" Width="1"></MapsLayerHighlightBorder>
+                </MapsLayerHighlightSettings>
+            </MapsLayer>
+        </MapsLayers>
+    </SfMaps>
+</div>
+
+<h3>@Name</h3>
+<h3>@Target</h3>
+
+@code {
+
+    public string Name { get; set; }
+    public string Target { get; set; }
+
+    public string DataPath { get; set; }
+
+    public IList<GameElement> GameElements { get; set; }
+
+    private MapDataSettings GetSettings()
+    {
+        var settings = new MapDataSettings
+        {
+            async = true,
+            type = "GET",
+        };
+
+        switch (this.GameStartInfo.Continent)
+        {
+            case GameContinentType.Africa:
+                settings.dataOptions = AfricaMapPath;
+                break;
+            case GameContinentType.Asia:
+                settings.dataOptions = AsiaMapPath;
+                break;
+            case GameContinentType.Europe:
+                settings.dataOptions = EuropeMapPath;
+                break;
+            case GameContinentType.SouthAmerica:
+                settings.dataOptions = SouthAmericaMapPath;
+                break;
+        }
+        if (this.GameStartInfo.Subject == GameSubjectType.UsaStates || this.GameStartInfo.Subject == GameSubjectType.UsaStateCapitals)
+        {
+            settings.dataOptions = UsaMapPath;
+        }
+
+        return settings;
+    }
+
+    void GetResult(IShapeSelectedEventArgs args)
+    {
+        JObject obj = args.Data as JObject;
+
+        if (obj.ContainsKey("Question"))
+        {
+            this.Name = obj.GetValue("Question").ToString();
+        }
+
+        Console.WriteLine(args.Data);
+
+    }
+
+    // ToDo: Rewrite GameEngine/FetchGameData for better flow.
+    protected override async Task OnInitializedAsync()
+    {
+        this.DataPath = "Question";
+        switch (this.GameStartInfo.Continent)
+        {
+            case GameContinentType.Africa when this.GameStartInfo.Subject == GameSubjectType.Countries:
+                this.GameElements = await this.Engine.FetchGameData(GameType.AfricanCountries, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.Africa when this.GameStartInfo.Subject == GameSubjectType.Capitals:
+                this.GameElements = await this.Engine.FetchGameData(GameType.AfricanCapitals, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.Asia when this.GameStartInfo.Subject == GameSubjectType.Countries:
+                this.GameElements = await this.Engine.FetchGameData(GameType.AsianCountries, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.Asia when this.GameStartInfo.Subject == GameSubjectType.Capitals:
+                this.GameElements = await this.Engine.FetchGameData(GameType.AsianCapitals, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.Europe when this.GameStartInfo.Subject == GameSubjectType.Countries:
+                this.GameElements = await this.Engine.FetchGameData(GameType.EuropeanCountries, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.Europe when this.GameStartInfo.Subject == GameSubjectType.Capitals:
+                this.GameElements = await this.Engine.FetchGameData(GameType.EuropeanCapitals, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.SouthAmerica when this.GameStartInfo.Subject == GameSubjectType.Countries:
+                this.GameElements = await this.Engine.FetchGameData(GameType.SouthAmericanCountries, this.GameStartInfo.IsShortGame);
+                break;
+            case GameContinentType.SouthAmerica when this.GameStartInfo.Subject == GameSubjectType.Capitals:
+                this.GameElements = await this.Engine.FetchGameData(GameType.SouthAmericanCapitals, this.GameStartInfo.IsShortGame);
+                break;
+            default:
+            {
+                if (this.GameStartInfo.Subject == GameSubjectType.UsaStates)
+                {
+                    this.GameElements = await this.Engine.FetchGameData(GameType.StatesInUsa, this.GameStartInfo.IsShortGame);
+                }
+                else if (this.GameStartInfo.Subject == GameSubjectType.UsaStateCapitals)
+                {
+                    this.GameElements = await this.Engine.FetchGameData(GameType.StateCapitalsInUsa, this.GameStartInfo.IsShortGame);
+                }
+                break;
+            }
+        }
+    }
+
+}

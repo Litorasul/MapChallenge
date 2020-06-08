@@ -1,5 +1,6 @@
 ﻿@using MapChallenge.Client.Game
 @inject IGameStartInfo GameStartInfo
+@inject NavigationManager NavigationManager
 
 <div class="container">
     <div class="justify-content-center m-5">
@@ -20,5 +21,6 @@
     private void SelectGameType(bool isShort)
     {
         this.GameStartInfo.IsShortGame = isShort;
+        this.NavigationManager.NavigateTo("/gameplay");
     }
 }

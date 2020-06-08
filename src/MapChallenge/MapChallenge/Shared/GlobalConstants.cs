@@ -19,17 +19,17 @@
         public const int ElementsAmountInShortGame = 20;
 
         // Client GeoJSON paths
-        public const string UsaMapPath = ".../MapsGeoJson/usa.json";
+        public const string UsaMapPath = "MapsGeoJson/usa.json";
 
-        public const string CanadaMapPath = ".../MapsGeoJson/canada.geo.json";
+        public const string CanadaMapPath = "MapsGeoJson/canada.geo.json";
 
-        public const string AfricaMapPath = ".../MapsGeoJson/AfricaLow.json";
+        public const string AfricaMapPath = "MapsGeoJson/AfricaLow.json";
 
-        public const string AsiaMapPath = ".../MapsGeoJson/asia.geo.json";
+        public const string AsiaMapPath = "MapsGeoJson/asia.geo.json";
 
-        public const string EuropeMapPath = ".../MapsGeoJson/europe.geo.json";
+        public const string EuropeMapPath = "MapsGeoJson/europe.geo.json";
 
-        public const string SouthAmericaMapPath = ".../MapsGeoJson/SouthAmericaLow.json";
+        public const string SouthAmericaMapPath = "MapsGeoJson/SouthAmericaLow.json";
 
         // List of all continent names
         public static readonly string[] Continents =

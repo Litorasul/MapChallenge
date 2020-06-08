@@ -111,6 +111,13 @@
             return element;
         }
 
+        /// <summary>
+        /// Fetch Game Elements for Countries based Games.
+        /// </summary>
+        /// <param name="continent">Name of the Continent.</param>
+        /// <param name="type">Game type.</param>
+        /// <param name="shortGame">Is it short Game.</param>
+        /// <returns>List of GameElement</returns>
         private async Task<IList<GameElement>> GetCountriesInContinentAsync(string continent, string type, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
@@ -140,6 +147,13 @@
             return elements;
         }
 
+        /// <summary>
+        /// Fetch Elements for State based Games.
+        /// </summary>
+        /// <param name="country">Is it All we have or just a specific Country.</param>
+        /// <param name="type">Game Type.</param>
+        /// <param name="shortGame">Is it short Game.</param>
+        /// <returns>List of GameElement</returns>
         private async Task<IList<GameElement>> GetStatesAsync(string country, string type, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
