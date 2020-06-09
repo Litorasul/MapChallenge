@@ -20,7 +20,34 @@
             this.client = client;
         }
 
-        public async Task<IList<GameElement>> FetchGameData(GameType type, bool shortGame)
+        public async Task<IList<GameViewModel>> FetchMapDataAsync(GameContinentType continent, GameSubjectType subject)
+        {
+            IList<GameViewModel> data = new List<GameViewModel>();
+            if (subject == GameSubjectType.UsaStates || subject == GameSubjectType.UsaStateCapitals)
+            {
+                data = await this.client.GetAllUsaStatesAsync();
+            }
+            else if (subject == GameSubjectType.AllStates || subject == GameSubjectType.AllStateCapitals)
+            {
+                data = await this.client.GetAllStatesAsync();
+            }
+            else
+            {
+                if (continent == GameContinentType.SouthAmerica)
+                {
+                    data = await this.client.GetAllCountriesPerContinentAsync("South America");
+                }
+                else
+                {
+                    data = await this.client.GetAllCountriesPerContinentAsync(continent.ToString());
+                }
+            }
+
+            return data;
+        }
+
+        // ToDo: Redesign this method.
+        public async Task<IList<GameElement>> FetchGameDataAsync(GameType type, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
 

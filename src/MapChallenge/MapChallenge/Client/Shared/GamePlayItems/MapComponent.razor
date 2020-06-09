@@ -4,21 +4,22 @@
 @using MapChallenge.Client.Infrastructure
 @using MapChallenge.Client.Game
 @using MapChallenge.Shared
+@using MapChallenge.Shared.ViewModels
 @using Syncfusion.Blazor.Diagrams
 @using static MapChallenge.Shared.GlobalConstants;
 @inject IGameStartInfo GameStartInfo
 @inject IGameEngine Engine
 
-<div >
+<div>
     <SfMaps Height="auto">
         <MapsZoomSettings Enable="true" PinchZooming="true"></MapsZoomSettings>
         <MapsAreaSettings Background="#bfc6c7"></MapsAreaSettings>
-        
+
         <MapsLayers>
             <MapsLayer ShapeData="@this.GetSettings()"
                        ShapePropertyPath='@("name")'
                        ShapeDataPath="@DataPath"
-                       DataSource="@GameElements">
+                       DataSource="@MapData">
                 <MapsShapeSettings Fill="#ffffff">
                     <MapsShapeBorder Color="#000000" Width="0.5"></MapsShapeBorder>
                 </MapsShapeSettings>
@@ -43,7 +44,7 @@
 
     public string DataPath { get; set; }
 
-    public IList<GameElement> GameElements { get; set; }
+    public IList<GameViewModel> MapData { get; set; }
 
     private MapDataSettings GetSettings()
     {
@@ -80,58 +81,19 @@
     {
         JObject obj = args.Data as JObject;
 
-        if (obj.ContainsKey("Question"))
+        if (obj.ContainsKey("Name"))
         {
-            this.Name = obj.GetValue("Question").ToString();
+            this.Name = obj.GetValue("Name").ToString();
         }
 
         Console.WriteLine(args.Data);
 
     }
 
-    // ToDo: Rewrite GameEngine/FetchGameData for better flow.
+    
     protected override async Task OnInitializedAsync()
     {
-        this.DataPath = "Question";
-        switch (this.GameStartInfo.Continent)
-        {
-            case GameContinentType.Africa when this.GameStartInfo.Subject == GameSubjectType.Countries:
-                this.GameElements = await this.Engine.FetchGameData(GameType.AfricanCountries, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.Africa when this.GameStartInfo.Subject == GameSubjectType.Capitals:
-                this.GameElements = await this.Engine.FetchGameData(GameType.AfricanCapitals, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.Asia when this.GameStartInfo.Subject == GameSubjectType.Countries:
-                this.GameElements = await this.Engine.FetchGameData(GameType.AsianCountries, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.Asia when this.GameStartInfo.Subject == GameSubjectType.Capitals:
-                this.GameElements = await this.Engine.FetchGameData(GameType.AsianCapitals, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.Europe when this.GameStartInfo.Subject == GameSubjectType.Countries:
-                this.GameElements = await this.Engine.FetchGameData(GameType.EuropeanCountries, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.Europe when this.GameStartInfo.Subject == GameSubjectType.Capitals:
-                this.GameElements = await this.Engine.FetchGameData(GameType.EuropeanCapitals, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.SouthAmerica when this.GameStartInfo.Subject == GameSubjectType.Countries:
-                this.GameElements = await this.Engine.FetchGameData(GameType.SouthAmericanCountries, this.GameStartInfo.IsShortGame);
-                break;
-            case GameContinentType.SouthAmerica when this.GameStartInfo.Subject == GameSubjectType.Capitals:
-                this.GameElements = await this.Engine.FetchGameData(GameType.SouthAmericanCapitals, this.GameStartInfo.IsShortGame);
-                break;
-            default:
-            {
-                if (this.GameStartInfo.Subject == GameSubjectType.UsaStates)
-                {
-                    this.GameElements = await this.Engine.FetchGameData(GameType.StatesInUsa, this.GameStartInfo.IsShortGame);
-                }
-                else if (this.GameStartInfo.Subject == GameSubjectType.UsaStateCapitals)
-                {
-                    this.GameElements = await this.Engine.FetchGameData(GameType.StateCapitalsInUsa, this.GameStartInfo.IsShortGame);
-                }
-                break;
-            }
-        }
+        this.DataPath = "Name";
+        this.MapData = await this.Engine.FetchMapDataAsync(this.GameStartInfo.Continent, this.GameStartInfo.Subject);
     }
-
 }
