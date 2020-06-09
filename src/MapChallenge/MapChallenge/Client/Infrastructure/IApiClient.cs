@@ -7,16 +7,16 @@
 
     public interface IApiClient
     {
-        Task<IList<CountryViewModel>> GetAllCountriesPerContinentAsync(string continent);
+        Task<IList<GameViewModel>> GetAllCountriesPerContinentAsync(string continent);
 
-        Task<IList<CountryViewModel>> GetCountAmountCountriesPerContinentAsync(string continent, int count);
+        Task<IList<GameViewModel>> GetCountAmountCountriesPerContinentAsync(string continent, int count);
 
-        Task<IList<StateViewModel>> GetAllStatesAsync();
+        Task<IList<GameViewModel>> GetAllStatesAsync();
 
-        Task<IList<StateViewModel>> GetCountAmountStatesAsync(int count);
+        Task<IList<GameViewModel>> GetCountAmountStatesAsync(int count);
 
-        Task<IList<StateViewModel>> GetAllUsaStatesAsync();
+        Task<IList<GameViewModel>> GetAllUsaStatesAsync();
 
-        Task<IList<StateViewModel>> GetCountAmountUsaStatesAsync(int count);
+        Task<IList<GameViewModel>> GetCountAmountUsaStatesAsync(int count);
     }
 }

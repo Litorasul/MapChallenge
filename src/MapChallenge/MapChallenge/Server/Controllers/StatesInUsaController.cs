@@ -20,7 +20,7 @@
         }
 
         [HttpGet("all")]
-        public IList<StateViewModel> GetAll()
+        public IList<GameViewModel> GetAll()
         {
             var states = this.service.GetAllStatesInUsa();
 
@@ -28,7 +28,7 @@
         }
 
         [HttpGet("Count")]
-        public ActionResult<IList<StateViewModel>> GetCountAmount(int count)
+        public ActionResult<IList<GameViewModel>> GetCountAmount(int count)
         {
             if (count < 1)
             {

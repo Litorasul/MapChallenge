@@ -1,6 +1,6 @@
 ﻿namespace MapChallenge.Shared.ViewModels
 {
-    public class StateViewModel
+    public class GameViewModel
     {
         public string Name { get; set; }
 

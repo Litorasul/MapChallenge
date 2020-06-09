@@ -14,7 +14,7 @@
         /// <param name="continent">The name of the continent.</param>
         /// <param name="count">The amount of entries needed.</param>
         /// <returns>List of View Models, shuffled.</returns>
-        List<CountryViewModel> GetAllCountriesByContinent(string continent, int? count = null);
+        List<GameViewModel> GetAllCountriesByContinent(string continent, int? count = null);
 
         /// <summary>
         /// Get all states from the Database, shuffled.
@@ -22,7 +22,7 @@
         /// <typeparam name="T">View Model, might contain Name or Capital or both.</typeparam>
         /// <param name="count">The amount of entries needed.</param>
         /// <returns>List of View Models, shuffled.</returns>
-        List<StateViewModel> GetAllStates(int? count = null);
+        List<GameViewModel> GetAllStates(int? count = null);
 
         /// <summary>
         /// Get all states in USA, shuffled.
@@ -30,6 +30,6 @@
         /// <typeparam name="T">View Model, might contain Name or Capital or both.</typeparam>
         /// <param name="count">The amount of entries needed.</param>
         /// <returns>List of View Models, shuffled.</returns>
-        List<StateViewModel> GetAllStatesInUsa(int? count = null);
+        List<GameViewModel> GetAllStatesInUsa(int? count = null);
     }
 }

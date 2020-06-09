@@ -16,46 +16,47 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<IList<CountryViewModel>> GetAllCountriesPerContinentAsync(string continent)
+        public async Task<IList<GameViewModel>> GetAllCountriesPerContinentAsync(string continent)
         {
             var countries = await this.httpClient
-                .GetFromJsonAsync<IList<CountryViewModel>>($"/api/CountriesPerContinent/all?continent={continent}");
+                .GetFromJsonAsync<IList<GameViewModel>>($"/api/CountriesPerContinent/all?continent={continent}");
             return countries;
         }
 
-        public async Task<IList<StateViewModel>> GetAllStatesAsync()
+        public async Task<IList<GameViewModel>> GetAllStatesAsync()
         {
             var states = await this.httpClient
-                .GetFromJsonAsync<IList<StateViewModel>>("/api/States/all");
+                .GetFromJsonAsync<IList<GameViewModel>>("/api/States/all");
             return states;
         }
 
-        public async Task<IList<StateViewModel>> GetAllUsaStatesAsync()
+        public async Task<IList<GameViewModel>> GetAllUsaStatesAsync()
         {
             var states = await this.httpClient
-                .GetFromJsonAsync<IList<StateViewModel>>("/api/StatesInUsa/all");
+                .GetFromJsonAsync<IList<GameViewModel>>("/api/StatesInUsa/all");
             return states;
         }
 
-        public async Task<IList<CountryViewModel>> GetCountAmountCountriesPerContinentAsync(string continent, int count)
+        public async Task<IList<GameViewModel>> GetCountAmountCountriesPerContinentAsync(string continent, int count)
         {
             var countries = await this.httpClient
-                .GetFromJsonAsync<IList<CountryViewModel>>($"/api/CountriesPerContinent/Count?continent={continent}&count={count}");
+                .GetFromJsonAsync<IList<GameViewModel>>($"/api/CountriesPerContinent/Count?continent={continent}&count={count}");
             return countries;
         }
 
-        public async Task<IList<StateViewModel>> GetCountAmountStatesAsync(int count)
+        public async Task<IList<GameViewModel>> GetCountAmountStatesAsync(int count)
         {
             var states = await this.httpClient
-                .GetFromJsonAsync<IList<StateViewModel>>($"/api/States/Count?count={count}");
+                .GetFromJsonAsync<IList<GameViewModel>>($"/api/States/Count?count={count}");
             return states;
         }
 
-        public async Task<IList<StateViewModel>> GetCountAmountUsaStatesAsync(int count)
+        public async Task<IList<GameViewModel>> GetCountAmountUsaStatesAsync(int count)
         {
             var states = await this.httpClient
-                .GetFromJsonAsync<IList<StateViewModel>>($"/api/StatesInUsa/Count?count={count}");
+                .GetFromJsonAsync<IList<GameViewModel>>($"/api/StatesInUsa/Count?count={count}");
             return states;
         }
+
     }
 }

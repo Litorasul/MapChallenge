@@ -24,7 +24,7 @@
         }
 
         [HttpGet("all")]
-        public ActionResult<IList<CountryViewModel>> GetAll(string continent)
+        public ActionResult<IList<GameViewModel>> GetAll(string continent)
         {
             if (string.IsNullOrWhiteSpace(continent))
             {
@@ -41,7 +41,7 @@
         }
 
         [HttpGet("Count")]
-        public ActionResult<IList<CountryViewModel>> GetCountAmount(string continent, int count)
+        public ActionResult<IList<GameViewModel>> GetCountAmount(string continent, int count)
         {
             if (string.IsNullOrWhiteSpace(continent))
             {

@@ -17,9 +17,9 @@
             this.dbContext = dbContext;
         }
 
-        public List<CountryViewModel> GetAllCountriesByContinent(string continent, int? count = null)
+        public List<GameViewModel> GetAllCountriesByContinent(string continent, int? count = null)
         {
-            List<CountryViewModel> countries = this.dbContext.Countries.Where(x => x.Continent.Name == continent).Select(x => new CountryViewModel
+            List<GameViewModel> countries = this.dbContext.Countries.Where(x => x.Continent.Name == continent).Select(x => new GameViewModel
             {
                 Name = x.Name,
                 Capital = x.Capital,
@@ -35,9 +35,9 @@
             return countries;
         }
 
-        public List<StateViewModel> GetAllStates(int? count = null)
+        public List<GameViewModel> GetAllStates(int? count = null)
         {
-            List<StateViewModel> states = this.dbContext.States.Select(x => new StateViewModel
+            List<GameViewModel> states = this.dbContext.States.Select(x => new GameViewModel
             {
                 Name = x.Name,
                 Capital = x.Capital,
@@ -53,9 +53,9 @@
             return states;
         }
 
-        public List<StateViewModel> GetAllStatesInUsa(int? count = null)
+        public List<GameViewModel> GetAllStatesInUsa(int? count = null)
         {
-            List<StateViewModel> states = this.dbContext.States.Where(x => x.Country.Name == "United States").Select(x => new StateViewModel
+            List<GameViewModel> states = this.dbContext.States.Where(x => x.Country.Name == "United States").Select(x => new GameViewModel
             {
                 Name = x.Name,
                 Capital = x.Capital,

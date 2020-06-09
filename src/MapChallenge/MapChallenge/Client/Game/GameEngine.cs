@@ -121,7 +121,7 @@
         private async Task<IList<GameElement>> GetCountriesInContinentAsync(string continent, string type, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
-            IList<CountryViewModel> modelList;
+            IList<GameViewModel> modelList;
 
             if (shortGame)
             {
@@ -157,7 +157,7 @@
         private async Task<IList<GameElement>> GetStatesAsync(string country, string type, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
-            IList<StateViewModel> modelList;
+            IList<GameViewModel> modelList;
 
             if (country == "Usa" && shortGame)
             {
