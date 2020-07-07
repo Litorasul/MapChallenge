@@ -22,10 +22,10 @@
     private async Task FetchRandom()
     {
 
-        countries = await this.Engine.FetchGameDataAsync(GameType.AsianCountries, true);
+        countries = await this.Engine.FetchGameDataAsync(GameContinentType.Africa, GameSubjectType.Capitals, true);
         random = countries.First().Question;
 
-        states = await this.Engine.FetchGameDataAsync(GameType.StateCapitalsInUsaAndCanada, false);
+        states = await this.Engine.FetchGameDataAsync(GameContinentType.NorthAmerica, GameSubjectType.AllStateCapitals, false);
         state = states.First().Question;
     }
 

@@ -46,85 +46,32 @@
             return data;
         }
 
-        // ToDo: Redesign this method.
-        public async Task<IList<GameElement>> FetchGameDataAsync(GameType type, bool shortGame)
+        // ToDo: Add Exception handling.
+        public async Task<IList<GameElement>> FetchGameDataAsync(GameContinentType continent, GameSubjectType subject, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
 
-            switch (type)
+            if (continent == GameContinentType.NorthAmerica)
             {
-                case GameType.AfricanCountries when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Africa", "country", false);
-                    break;
-                case GameType.AsianCountries when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Asia", "country", false);
-                    break;
-                case GameType.EuropeanCountries when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Europe", "country", false);
-                    break;
-                case GameType.SouthAmericanCountries when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("South America", "country", false);
-                    break;
-                case GameType.AfricanCapitals when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Africa", "capital", false);
-                    break;
-                case GameType.AsianCapitals when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Asia", "capital", false);
-                    break;
-                case GameType.EuropeanCapitals when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Europe", "capital", false);
-                    break;
-                case GameType.SouthAmericanCapitals when !shortGame:
-                    elements = await this.GetCountriesInContinentAsync("South America", "capital", false);
-                    break;
-                case GameType.AfricanCountries when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Africa", "country", true);
-                    break;
-                case GameType.AsianCountries when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Asia", "country", true);
-                    break;
-                case GameType.EuropeanCountries when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Europe", "country", true);
-                    break;
-                case GameType.SouthAmericanCountries when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("South America", "country", true);
-                    break;
-                case GameType.AfricanCapitals when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Africa", "capital", true);
-                    break;
-                case GameType.AsianCapitals when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Asia", "capital", true);
-                    break;
-                case GameType.EuropeanCapitals when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("Europe", "capital", true);
-                    break;
-                case GameType.SouthAmericanCapitals when shortGame:
-                    elements = await this.GetCountriesInContinentAsync("South America", "capital", true);
-                    break;
-                case GameType.StatesInUsaAndCanada when !shortGame:
-                    elements = await this.GetStatesAsync("All", "state", false);
-                    break;
-                case GameType.StatesInUsaAndCanada when shortGame:
-                    elements = await this.GetStatesAsync("All", "state", true);
-                    break;
-                case GameType.StateCapitalsInUsaAndCanada when !shortGame:
-                    elements = await this.GetStatesAsync("All", "capital", false);
-                    break;
-                case GameType.StateCapitalsInUsaAndCanada when shortGame:
-                    elements = await this.GetStatesAsync("All", "capital", true);
-                    break;
-                case GameType.StatesInUsa when !shortGame:
-                    elements = await this.GetStatesAsync("Usa", "state", false);
-                    break;
-                case GameType.StatesInUsa when shortGame:
-                    elements = await this.GetStatesAsync("Usa", "state", true);
-                    break;
-                case GameType.StateCapitalsInUsa when !shortGame:
-                    elements = await this.GetStatesAsync("Usa", "capital", false);
-                    break;
-                case GameType.StateCapitalsInUsa when shortGame:
-                    elements = await this.GetStatesAsync("Usa", "capital", true);
-                    break;
+                switch (subject)
+                {
+                    case GameSubjectType.UsaStates:
+                        elements = await this.GetStatesAsync("Usa", "state", shortGame);
+                        break;
+                    case GameSubjectType.UsaStateCapitals:
+                        elements = await this.GetStatesAsync("Usa", "capital", shortGame);
+                        break;
+                    case GameSubjectType.AllStates:
+                        elements = await this.GetStatesAsync("All", "state", shortGame);
+                        break;
+                    case GameSubjectType.AllStateCapitals:
+                        elements = await this.GetStatesAsync("All", "capital", shortGame);
+                        break;
+                }
+            }
+            else
+            {
+                elements = await this.GetCountriesInContinentAsync(continent, subject, shortGame);
             }
 
             return elements;
@@ -142,22 +89,37 @@
         /// Fetch Game Elements for Countries based Games.
         /// </summary>
         /// <param name="continent">Name of the Continent.</param>
-        /// <param name="type">Game type.</param>
+        /// <param name="subject">Game type.</param>
         /// <param name="shortGame">Is it short Game.</param>
-        /// <returns>List of GameElement</returns>
-        private async Task<IList<GameElement>> GetCountriesInContinentAsync(string continent, string type, bool shortGame)
+        /// <returns>List of GameElement.</returns>
+        private async Task<IList<GameElement>> GetCountriesInContinentAsync(GameContinentType continent, GameSubjectType subject, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
             IList<GameViewModel> modelList;
 
             if (shortGame)
             {
-                modelList =
-                    await this.client.GetCountAmountCountriesPerContinentAsync(continent, ElementsAmountInShortGame);
+                if (continent == GameContinentType.SouthAmerica)
+                {
+                    modelList =
+                        await this.client.GetCountAmountCountriesPerContinentAsync("South America", ElementsAmountInShortGame);
+                }
+                else
+                {
+                    modelList =
+                        await this.client.GetCountAmountCountriesPerContinentAsync(continent.ToString(), ElementsAmountInShortGame);
+                }
             }
             else
             {
-                 modelList = await this.client.GetAllCountriesPerContinentAsync(continent);
+                if (continent == GameContinentType.SouthAmerica)
+                {
+                    modelList = await this.client.GetAllCountriesPerContinentAsync("South America");
+                }
+                else
+                {
+                    modelList = await this.client.GetAllCountriesPerContinentAsync(continent.ToString());
+                }
             }
 
             foreach (var model in modelList)
@@ -165,7 +127,7 @@
                 GameElement element = new GameElement
                 {
                     State = GameState.Unanswered,
-                    Question = type == "country" ? model.Name : model.Capital,
+                    Question = subject == GameSubjectType.Countries ? model.Name : model.Capital,
                 };
 
                 elements.Add(element);
@@ -180,7 +142,7 @@
         /// <param name="country">Is it All we have or just a specific Country.</param>
         /// <param name="type">Game Type.</param>
         /// <param name="shortGame">Is it short Game.</param>
-        /// <returns>List of GameElement</returns>
+        /// <returns>List of GameElement.</returns>
         private async Task<IList<GameElement>> GetStatesAsync(string country, string type, bool shortGame)
         {
             IList<GameElement> elements = new List<GameElement>();
