@@ -1,7 +1,23 @@
 ﻿@page "/gameplay"
+@using Syncfusion.Blazor.Maps
+@using Newtonsoft.Json.Linq
 
-<MapComponent></MapComponent>
+<MapComponent OnClickCallback="@GetResult"></MapComponent>
+<h3>@Name</h3>
 
 @code {
+    public string Name { get; set; }
+    void GetResult(IShapeSelectedEventArgs args)
+    {
+        JObject obj = args.Data as JObject;
+
+        if (obj.ContainsKey("Name"))
+        {
+            this.Name = obj.GetValue("Name").ToString();
+        }
+
+        Console.WriteLine(args.Data);
+
+    }
 
 }

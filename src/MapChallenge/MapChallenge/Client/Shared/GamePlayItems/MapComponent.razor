@@ -25,7 +25,7 @@
                 </MapsShapeSettings>
                 <MapsLayerTooltipSettings Visible="true" ValuePath="@DataPath"></MapsLayerTooltipSettings>
                 <MapsLayerSelectionSettings Enable="true" Fill="red" Opacity="1"></MapsLayerSelectionSettings>
-                <MapsEvents ShapeSelected="GetResult"></MapsEvents>
+                <MapsEvents ShapeSelected="OnClickCallback"></MapsEvents>
                 <MapsLayerHighlightSettings Enable="true" Fill="green">
                     <MapsLayerHighlightBorder Color="white" Width="1"></MapsLayerHighlightBorder>
                 </MapsLayerHighlightSettings>
@@ -34,13 +34,12 @@
     </SfMaps>
 </div>
 
-<h3>@Name</h3>
-<h3>@Target</h3>
+
 
 @code {
 
-    public string Name { get; set; }
-    public string Target { get; set; }
+    [Parameter]
+    public EventCallback<IShapeSelectedEventArgs> OnClickCallback { get; set; }
 
     public string DataPath { get; set; }
 
@@ -77,20 +76,7 @@
         return settings;
     }
 
-    void GetResult(IShapeSelectedEventArgs args)
-    {
-        JObject obj = args.Data as JObject;
 
-        if (obj.ContainsKey("Name"))
-        {
-            this.Name = obj.GetValue("Name").ToString();
-        }
-
-        Console.WriteLine(args.Data);
-
-    }
-
-    
     protected override async Task OnInitializedAsync()
     {
         this.DataPath = "Name";
