@@ -2,22 +2,22 @@
 @using Syncfusion.Blazor.Maps
 @using Newtonsoft.Json.Linq
 
-<MapComponent OnClickCallback="@GetResult"></MapComponent>
-<h3>@Name</h3>
+<MapComponent OnClickCallback="@GetClickShape"></MapComponent>
+<ResultsItem @bind-LiveResults="Result" />
 
 @code {
-    public string Name { get; set; }
-    void GetResult(IShapeSelectedEventArgs args)
+    [Parameter]
+    public List<string> Result { get; set; } = new List<string>();
+
+    void GetClickShape(IShapeSelectedEventArgs args)
     {
         JObject obj = args.Data as JObject;
 
         if (obj.ContainsKey("Name"))
         {
-            this.Name = obj.GetValue("Name").ToString();
+            string name = obj.GetValue("Name").ToString();
+            this.Result.Add(name);
         }
-
-        Console.WriteLine(args.Data);
-
     }
 
 }

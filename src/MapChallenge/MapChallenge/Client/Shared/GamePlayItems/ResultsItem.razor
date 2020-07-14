@@ -1,0 +1,16 @@
+﻿<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        @foreach (var result in LiveResults)
+        {
+            <li class="list-group-item">@result</li>
+        }
+    </ul>
+</div>
+
+@code {
+    [Parameter]
+    public List<string> LiveResults { get; set; }
+
+    [Parameter]
+    public EventCallback<List<string>> LiveResultsChanged { get; set; }
+}
