@@ -1,9 +1,16 @@
 ﻿@page "/gameplay"
 @using Syncfusion.Blazor.Maps
 @using Newtonsoft.Json.Linq
+<div class="row">
+    <div class="col-9">
+        <MapComponent OnClickCallback="@GetClickShape"></MapComponent>
+    </div>
+    <div class="col-3">
+        
+        <ResultsComponent @bind-LiveResults="Result" />
+    </div>
+</div>
 
-<MapComponent OnClickCallback="@GetClickShape"></MapComponent>
-<ResultsItem @bind-LiveResults="Result" />
 
 @code {
     [Parameter]
