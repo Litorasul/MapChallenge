@@ -3,11 +3,13 @@
 @using Newtonsoft.Json.Linq
 <div class="row">
     <div class="col-9">
+        <QuestionComponent></QuestionComponent>
+        
         <MapComponent OnClickCallback="@GetClickShape"></MapComponent>
     </div>
     <div class="col-3">
         
-        <ResultsComponent @bind-LiveResults="Result" />
+        <ResultsComponent @bind-LiveResults="Result"/>
     </div>
 </div>
 

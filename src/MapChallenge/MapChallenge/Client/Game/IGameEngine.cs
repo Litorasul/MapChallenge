@@ -26,6 +26,8 @@
         /// <returns>IList of GameViewModel.</returns>
         Task<IList<GameViewModel>> FetchMapDataAsync(GameContinentType continent, GameSubjectType subject);
 
+        IEnumerable<GameElement> NextQuestion(IList<GameElement> gameElements);
+
         GameElement Compare(GameElement element);
     }
 }

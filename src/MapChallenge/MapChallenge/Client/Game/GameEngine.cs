@@ -77,6 +77,14 @@
             return elements;
         }
 
+        public IEnumerable<GameElement> NextQuestion(IList<GameElement> gameElements)
+        {
+            foreach (var element in gameElements)
+            {
+                yield return element;
+            }
+        }
+
         public GameElement Compare(GameElement element)
         {
             element.State =
