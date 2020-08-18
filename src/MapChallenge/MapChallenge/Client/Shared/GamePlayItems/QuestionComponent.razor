@@ -4,19 +4,33 @@
 
 <div class="card text-center m-1" style="width: 18rem;">
     <div class="card-body">
-        <h3 class="card-title">@Question</h3>
+        @if (this.CurrentElement == null)
+        {
+            <h3 class="card-title">Loading...</h3>
+        }
+        else
+        {
+            <h3 class="card-title">@this.CurrentElement.Question</h3>
+        }
     </div>
 </div>
 
 @code {
-    public string Question;
-    private IList<GameElement> allElements;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var list = await this.Engine.FetchGameDataAsync(this.GameStartInfo.Continent, this.GameStartInfo.Subject, this.GameStartInfo.IsShortGame);
-        this.allElements = list;
-        this.Question = "Question";
-    }
+    [Parameter]
+    public GameElement CurrentElement { get; set; }
+
+    [Parameter]
+    public EventCallback<GameElement> CurrentElementChanged { get; set; }
+
+
+    //protected override async Task OnInitializedAsync()
+    //{
+
+
+    //    this.Question = "Question";
+
+
+    //}
 
 }

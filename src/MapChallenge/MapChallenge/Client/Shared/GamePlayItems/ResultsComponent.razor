@@ -1,16 +1,24 @@
-﻿<div class="card" style="width: 18rem;">
-    <ul class="list-group list-group-flush">
+﻿@using MapChallenge.Client.Game
+<div class="card" style="width: 18rem;">
+    <div>
         @foreach (var result in LiveResults)
         {
-            <li class="list-group-item">@result</li>
+            if (result.State == GameState.Correct)
+            {
+                <span class="border m-1" style="color: forestgreen"><i class="fas fa-check"></i> @result.Question </span>
+            }
+            else
+            {
+                <span class="border m-1" style="color: red"><i class="fas fa-times"></i> @result.Question </span>
+            }
         }
-    </ul>
+    </div>
 </div>
 
 @code {
     [Parameter]
-    public List<string> LiveResults { get; set; }
+    public List<GameElement> LiveResults { get; set; }
 
     [Parameter]
-    public EventCallback<List<string>> LiveResultsChanged { get; set; }
+    public EventCallback<List<GameElement>> LiveResultsChanged { get; set; }
 }

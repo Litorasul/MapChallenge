@@ -1,22 +1,32 @@
 ﻿@page "/gameplay"
 @using Syncfusion.Blazor.Maps
 @using Newtonsoft.Json.Linq
+@using MapChallenge.Client.Game
+@inject IGameStartInfo GameStartInfo
+@inject IGameEngine Engine
+
 <div class="row">
     <div class="col-9">
-        <QuestionComponent></QuestionComponent>
-        
+        <QuestionComponent @bind-CurrentElement="Element"></QuestionComponent>
+
         <MapComponent OnClickCallback="@GetClickShape"></MapComponent>
     </div>
     <div class="col-3">
-        
-        <ResultsComponent @bind-LiveResults="Result"/>
+
+        <ResultsComponent @bind-LiveResults="Result" />
     </div>
 </div>
 
 
 @code {
     [Parameter]
-    public List<string> Result { get; set; } = new List<string>();
+    public List<GameElement> Result { get; set; } = new List<GameElement>();
+
+    [Parameter]
+    public GameElement Element { get; set; }
+
+    public IList<GameElement> GameElements { get; set; }
+
 
     void GetClickShape(IShapeSelectedEventArgs args)
     {
@@ -24,9 +34,38 @@
 
         if (obj.ContainsKey("Name"))
         {
+            // Get Clicked Shape Name.
             string name = obj.GetValue("Name").ToString();
-            this.Result.Add(name);
+
+            // Set the Answer.
+            this.Element.Answer = name;
+
+            // Check the Answer.
+            this.Element = this.Engine.Compare(this.Element);
+
+            // Send Result to the ResultComponent.
+            this.Result.Add(this.Element);
+
+            this.GameElements.RemoveAt(0);
+            this.NextElement();
         }
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await this.Engine.FetchGameDataAsync(this.GameStartInfo.Continent, this.GameStartInfo.Subject, this.GameStartInfo.IsShortGame);
+        this.GameElements = list;
+        this.NextElement();
+    }
+
+    void NextElement()
+    {
+
+        // Send the GameElement to the QuestionComponent.
+        this.Element = this.GameElements[0];
+
+    }
+
+
 
 }
