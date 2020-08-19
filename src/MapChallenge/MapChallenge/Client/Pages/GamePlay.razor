@@ -13,7 +13,7 @@
     </div>
     <div class="col-3">
 
-        <ResultsComponent @bind-LiveResults="Result" />
+        <ResultsComponent @bind-LiveResults="Result" @bind-Points="Points" />
     </div>
 </div>
 
@@ -21,6 +21,13 @@
 @code {
     [Parameter]
     public List<GameElement> Result { get; set; } = new List<GameElement>();
+
+    [Parameter]
+    public int Points
+    {
+        get => points;
+        set => points = value;
+    }
 
     [Parameter]
     public GameElement Element { get; set; }
@@ -42,6 +49,12 @@
 
             // Check the Answer.
             this.Element = this.Engine.Compare(this.Element);
+
+            // Assign Points
+            if (this.Element.State == GameState.Correct)
+            {
+                this.points += 10;
+            }
 
             // Send Result to the ResultComponent.
             this.Result.Add(this.Element);
@@ -67,5 +80,5 @@
     }
 
 
-
+    private int points = 0;
 }
