@@ -12,6 +12,8 @@
 
         GameSubjectType Subject { get; set; }
 
+        int Points { get; set; }
+
         bool IsShortGame { get; set; }
     }
 }

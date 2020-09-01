@@ -1,0 +1,18 @@
+﻿@page "/gameover"
+@using MapChallenge.Client.Game
+@inject IGameStartInfo GameStartInfo
+
+<div class="card m-5">
+    <div class="card-header">
+        Game Over
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">You have: @GameStartInfo.Points Points</h5>
+        <p class="card-text">You played: @GameStartInfo.Continent.ToString().</p>
+        <a href="#" class="btn btn-primary">New Game</a>
+    </div>
+</div>
+
+@code {
+
+}

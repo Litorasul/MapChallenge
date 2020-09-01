@@ -42,6 +42,8 @@
             }
         }
 
+        public int Points { get; set; }
+
         private void NotifyDataChanged() => this.OnChange?.Invoke();
     }
 }
