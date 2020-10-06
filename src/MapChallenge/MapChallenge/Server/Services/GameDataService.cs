@@ -1,10 +1,14 @@
-﻿namespace MapChallenge.Server.Services
+﻿using System.Threading.Tasks;
+using MapChallenge.Server.Models.GameData;
+
+namespace MapChallenge.Server.Services
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Cryptography;
 
     using MapChallenge.Server.Data;
+    using MapChallenge.Shared;
     using MapChallenge.Shared.Mapping;
     using MapChallenge.Shared.ViewModels;
 
@@ -69,6 +73,21 @@
             }
 
             return states;
+        }
+
+        public async Task<int> AddNewResult(int points, string playerName, GameType gameType)
+        {
+            var result = new Result
+            {
+                Points = points,
+                PlayerName = playerName,
+                GameType = gameType,
+            };
+
+            await this.dbContext.Results.AddAsync(result);
+            await this.dbContext.SaveChangesAsync();
+
+            return result.Id;
         }
 
         private static void Shuffle<T>(IList<T> list)
