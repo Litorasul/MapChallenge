@@ -1,13 +1,12 @@
-﻿using System.Threading.Tasks;
-using MapChallenge.Server.Models.GameData;
-
-namespace MapChallenge.Server.Services
+﻿namespace MapChallenge.Server.Services
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Cryptography;
+    using System.Threading.Tasks;
 
     using MapChallenge.Server.Data;
+    using MapChallenge.Server.Models.GameData;
     using MapChallenge.Shared;
     using MapChallenge.Shared.Mapping;
     using MapChallenge.Shared.ViewModels;

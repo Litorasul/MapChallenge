@@ -9,6 +9,7 @@ namespace MapChallenge.Client
     using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
+
     using Syncfusion.Blazor;
 
     using static MapChallenge.Shared.Keys;
